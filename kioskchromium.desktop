@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/orangepi/start-kiosk.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Kiosk Chromium
+Comment=Start Chromium in kiosk mode
