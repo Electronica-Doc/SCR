@@ -1,0 +1,7 @@
+poniedziałek	Zamknięte
+wtorek			09:30–18:00
+środa			09:30–18:00
+czwartek		09:30–18:00
+piątek			09:30–18:00
+sobota			09:30–16:00
+niedziela		Zamknięte
