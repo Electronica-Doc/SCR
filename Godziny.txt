@@ -1,7 +1,29 @@
-poniedziałek	Zamknięte
-wtorek			09:30–18:00
-środa			09:30–18:00
-czwartek		09:30–18:00
-piątek			09:30–18:00
-sobota			09:30–16:00
-niedziela		Zamknięte
+[pl]
+Godziny otwarcia:
+Poniedziałek - Piątek: 9:00 - 17:00
+Sobota: 10:00 - 14:00
+Niedziela: nieczynne
+
+Dodatkowe informacje:
+  - Przerwa na lunch: 13:00 - 14:00
+  - Kontakt telefoniczny dostępny w godzinach pracy
+
+[en]
+Opening hours:
+Monday - Friday: 9:00 AM - 5:00 PM
+Saturday: 10:00 AM - 2:00 PM
+Sunday: closed
+
+Additional information:
+  - Lunch break: 1:00 PM - 2:00 PM
+  - Phone contact available during business hours
+
+[nl]
+Openingstijden:
+Maandag - Vrijdag: 9:00 - 17:00
+Zaterdag: 10:00 - 14:00
+Zondag: gesloten
+
+Extra informatie:
+  - Lunchpauze: 13:00 - 14:00
+  - Telefonische bereikbaarheid tijdens openingstijden
