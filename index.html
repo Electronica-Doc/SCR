@@ -207,9 +207,9 @@
       });
       const data = await response.json();
       const combined = 
-        "\n" + (data.pl || "Brak opisu.") + "\n\n" +
-        "\n" + (data.en || "No description.") + "\n\n" +
-        "\n" + (data.nl || "Geen beschrijving.");
+        "Otwarte:\n" + (data.pl || "Brak opisu.") + "\n\n" +
+        "Open:\n" + (data.en || "No description.") + "\n\n" +
+        "Open\n" + (data.nl || "Geen beschrijving.");
       descElement.textContent = combined;
     } catch (e) {
       console.error(e);
