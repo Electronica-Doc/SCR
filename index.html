@@ -1,312 +1,318 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pokaz Slajdów</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informacja – Przenosimy firmę</title>
+
 <style>
-  body {
-    margin: 0;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-    font-size: 20px;
-  }
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: #0f1f2e;
+        font-family: Arial, sans-serif;
+        color: white;
+    }
 
-  .slideshow-container {
-    position: relative;
-    width: 100vw;
-    max-width: 100%;
-    height: 100vh;
-    background-color: #0f4c4c;
-    border-radius: 20px;
-    box-shadow:
-      0 0 15px rgba(15, 76, 76, 0.7),
-      inset 0 0 10px rgba(0,0,0,0.8);
-    overflow: hidden;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-  }
+    /* SLIDES */
+    .slide {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out;
+        padding: 2vh 4vw;
+        box-sizing: border-box;
+        z-index: 5;
+    }
 
-  .slide {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%;
-    height: 95%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    background-color: rgba(0,0,0,0.3);
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
-  }
+    .active { opacity: 1; }
 
-  .slide.active {
-    opacity: 1;
-    z-index: 1;
-  }
+    .accent { color: #6bffcf; font-weight: bold; }
 
-  .slide-content {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-  }
+    /* AUTO-SKALOWANIE + ESTETYKA */
+    .warning {
+        font-size: clamp(5rem, 18vw, 20vh); /* większy trójkąt */
+        margin-bottom: 0.8vh; /* mniejsza przerwa pod trójkątem */
+        color: red;
+        animation: pulse 1s infinite alternate;
+    }
 
-  .slide img {
-    margin-left: 5vh;
-    max-width: 100vh;
-    max-height: 100vh;
-    object-fit: contain;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.9);
-  }
+    .address {
+        font-size: clamp(2.5rem, 10vw, 10vh);
+        margin: 1vh 0 3vh 0;
+        color: #6bffcf;
+        font-weight: bold;
+    }
 
-  .slide-description {
-    flex: 1;
-    font-size: 1.2em;
-    padding: 20px;
-    max-height: 100%;
-    overflow-y: auto;
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 10px;
-    width: 100%;
-    white-space: pre-wrap;
-    font-family: monospace;
-  }
+    .slide h1 {
+        font-size: clamp(2rem, 8vw, 8.5vh);
+        margin-bottom: 2vh;
+    }
 
-  .frame {
-    position: absolute;
-    top: 10px; left: 10px; right: 10px; bottom: 10px;
-    border-radius: 20px;
-    pointer-events: none;
-    box-sizing: border-box;
-    border: 5px solid;
-    border-image: linear-gradient(45deg, #0f4c4c, #004242, #0f4c4c) 1;
-    mix-blend-mode: screen;
-  }
+    .slide p {
+        font-size: clamp(1.4rem, 4.5vw, 5vh);
+        margin: 1.5vh 0;
+        line-height: 1.1;
+    }
+
+    .slide p b {
+        font-size: clamp(1.6rem, 5vw, 5.5vh);
+    }
+
+    /* ostatnia linia – numer telefonu – odsunięta od dołu */
+    .slide p:last-of-type {
+        margin-bottom: 4vh;
+    }
+
+    @keyframes pulse {
+        from { opacity: 0.3; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1.1); }
+    }
+
+    .flash {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%);
+        top: 0;
+        left: 0;
+        opacity: 0;
+        animation: flashAnim 6s infinite;
+        pointer-events: none;
+        z-index: 3;
+    }
+
+    @keyframes flashAnim {
+        0% { opacity: 0; }
+        10% { opacity: 0.4; }
+        20% { opacity: 0; }
+        100% { opacity: 0; }
+    }
+
+    /* TAŚMA ROMBÓW */
+    .tape-wrapper {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        pointer-events: none;
+        z-index: 4;
+    }
+
+    .tape {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        mask:
+            linear-gradient(0deg, black 0 2%, transparent 2% 98%, black 98% 100%) top/100% 100% no-repeat,
+            linear-gradient(90deg, black 0 2%, transparent 2% 98%, black 98% 100%) left/100% 100% no-repeat;
+        background-size: 200% 200%;
+        background-image:
+            repeating-linear-gradient(
+                45deg,
+                red 0 40px,
+                red 40px 40px,
+                white 40px 80px,
+                white 80px 80px
+            );
+        animation: moveTape 6s linear infinite;
+    }
+
+    @keyframes moveTape {
+        from { background-position: 0 0; }
+        to   { background-position: 200% 200%; }
+    }
+
+    /* WYKRZYKNIKI */
+    .boom {
+        position: absolute;
+        font-size: 90px;
+        color: #ff0000;
+        filter: drop-shadow(0 0 12px #ff0000);
+        animation: boomAnim 0.9s ease-out forwards;
+        pointer-events: none;
+        z-index: 7;
+    }
+
+    @keyframes boomAnim {
+        0% { transform: scale(0.2) rotate(0deg); opacity: 1; }
+        30% { transform: scale(1.5) rotate(15deg); opacity: 1; }
+        60% { transform: scale(1.1) rotate(-15deg); opacity: 0.8; }
+        100% { transform: scale(0.2) rotate(0deg); opacity: 0; }
+    }
+
+    /* GLITCH WARSTWY */
+    .glitch-layer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 6;
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    .glitch-pixelate {
+        backdrop-filter: blur(0px);
+        animation: pixelateAnim 3s infinite;
+    }
+
+    @keyframes pixelateAnim {
+        0% { opacity: 0; backdrop-filter: blur(0px); }
+        10% { opacity: 0.4; backdrop-filter: blur(3px); }
+        20% { opacity: 0.2; backdrop-filter: blur(1px); }
+        40% { opacity: 0.5; backdrop-filter: blur(6px); }
+        60% { opacity: 0; backdrop-filter: blur(0px); }
+        100% { opacity: 0; }
+    }
+
+    .glitch-blocks {
+        background: repeating-linear-gradient(
+            90deg,
+            rgba(255,0,0,0.15) 0px,
+            rgba(255,0,0,0.15) 4px,
+            transparent 5px,
+            transparent 12px
+        );
+        animation: blocksAnim 2.8s infinite;
+    }
+
+    @keyframes blocksAnim {
+        0% { opacity: 0; transform: translateX(0); }
+        15% { opacity: 0.4; transform: translateX(-20px); }
+        30% { opacity: 0.2; transform: translateX(10px); }
+        50% { opacity: 0.5; transform: translateX(-40px); }
+        70% { opacity: 0.1; transform: translateX(5px); }
+        100% { opacity: 0; transform: translateX(0); }
+    }
+
+    .glitch-waves {
+        background: linear-gradient(
+            to right,
+            rgba(255,255,255,0.1),
+            rgba(255,255,255,0),
+            rgba(255,255,255,0.1)
+        );
+        animation: wavesAnim 4s infinite;
+    }
+
+    @keyframes wavesAnim {
+        0% { opacity: 0; transform: scaleX(1); }
+        20% { opacity: 0.3; transform: scaleX(1.3); }
+        40% { opacity: 0.1; transform: scaleX(0.8); }
+        60% { opacity: 0.4; transform: scaleX(1.5); }
+        100% { opacity: 0; transform: scaleX(1); }
+    }
+
 </style>
 </head>
+
 <body>
 
-<div class="slideshow-container">
+<div class="flash"></div>
 
+<!-- GLITCH WARSTWY -->
+<div class="glitch-layer glitch-pixelate"></div>
+<div class="glitch-layer glitch-blocks"></div>
+<div class="glitch-layer glitch-waves"></div>
 
+<div class="tape-wrapper">
+    <div class="tape"></div>
+</div>
 
-  
-  <div class="slide" id="slide4">
-    <div class="slide-content">
-      <img src="slide4.jpg" alt="Slajd 4">
-      <pre class="slide-description" id="slide4-desc">Ładowanie opisu...</pre>
-    </div>
-  </div>
-      <div class="slide" id="slide3">
-    <div class="slide-content">
-      <img src="slide3.jpg" alt="Slajd 3">
-      <div class="slide-description">
+<!-- SLIDE 1 – PL -->
+<div class="slide active" id="slide1">
+    <div class="warning">⚠️</div>
+    <h1 class="accent">Przenosimy firmę!</h1>
+    <p><b>Nowy adres:</b></p>
+    <div class="address">Prade 26</div>
+    <p>Od <b>1 maja</b> działamy pod nowym adresem.</p>
+    <p>W pilnych sprawach prosimy dzwonić:<br><b>+31 619299943</b></p>
+</div>
 
-W naszej ofercie znajdziesz szeroki wybór akcesoriów – od ładowarek i kabli,<br>po przejściówki, uchwyty i inne przydatne dodatki.<br>Sprzedajemy wyłącznie marki, które sami sprawdziliśmy i którym ufamy.<br>Wybierając u nas, masz pewność jakości i niezawodności.
+<!-- SLIDE 2 – NL -->
+<div class="slide" id="slide2">
+    <div class="warning">⚠️</div>
+    <h1 class="accent">Wij verhuizen!</h1>
+    <p><b>Nieuw adres:</b></p>
+    <div class="address">Prade 26</div>
+    <p>Vanaf <b>1 mei</b> zijn wij actief op ons nieuwe adres.</p>
+    <p>Voor dringende zaken kunt u bellen:<br><b>+31 619299943</b></p>
+</div>
 
-We offer a wide selection of accessories – from chargers and cables<br>to adapters, holders, and other useful add-ons.<br>We only sell trusted brands we've personally tested and approved.<br>When you buy from us, you're choosing quality you can rely on.
-
-Wij bieden een breed assortiment accessoires – van opladers en kabels<br>tot adapters, houders en andere handige extra's.<br>We verkopen alleen zorgvuldig geselecteerde merken die wij zelf vertrouwen.<br>Bij ons kies je voor kwaliteit en betrouwbaarheid.
-
-      </div>
-    </div>
-  </div>
-    <div class="slide" id="slide1">
-    <div class="slide-content">
-      <img src="slide1.jpg" alt="Slajd 1">
-      <div class="slide-description">
-
-
-Zajmujemy się profesjonalną naprawą elektroniki – komputerów, telefonów oraz konsol do gier.<br>Gwarantujemy dokładność i wysoką jakość usług, dzięki nowoczesnym narzędziom i doświadczonym technikom.
-
-
-We specialize in professional electronics repair – computers, phones, and gaming consoles.<br>We guarantee precision and high-quality service using modern tools and experienced technicians.
-
-
-Wij zijn gespecialiseerd in professionele elektronica reparatie – computers, telefoons en gameconsoles.<br>Wij garanderen nauwkeurigheid en hoogwaardige service met moderne apparatuur en ervaren technici.
-
-      </div>
-    </div>
-  </div>
-    <div class="slide" id="slide2">
-    <div class="slide-content">
-      <img src="slide2.jpg" alt="Slajd 2">
-      <div class="slide-description">
-
-Naprawiamy telefony – wymieniamy ekrany, baterie oraz peryferia,<br>a także usuwamy poważniejsze usterki na płytach głównych.
-
-We repair phones – replacing screens, batteries, and peripherals,<br>as well as fixing more serious issues on motherboards.
-
-Wij repareren telefoons – we vervangen schermen, batterijen en randapparatuur,<br>en lossen ook ernstigere problemen op moederborden op.
-
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="slide" id="slide6">
-    <div class="slide-content">
-      <img src="slide6.JPG" alt="Slajd 6">
-      <div class="slide-description">
-
-Czyszczenie wnętrza urządzenia i wymiana pasty termoprzewodzącej<br>to klucz do niezawodności i niższych temperatur pracy.<br>To jedna z najczęstszych napraw w naszym serwisie – zaniedbanie może skończyć się przegrzaniem lub trwałym uszkodzeniem.
-
-Internal cleaning and thermal paste replacement<br>are key to reliability and lower operating temperatures.<br>It’s one of our most frequent repairs – neglect can lead to overheating or permanent damage.
-
-Interne reiniging en vervanging van thermische pasta<br>zijn essentieel voor betrouwbaarheid en lagere temperaturen.<br>Een van onze meest voorkomende herstellingen – verwaarlozing kan leiden tot oververhitting of blijvende schade.
-
-      </div>
-    </div>
-  </div>
-  <div class="slide" id="slide7">
-    <div class="slide-content">
-      <img src="slide7.jpg" alt="Slajd 7">
-      <div class="slide-description">
-
-Instalujemy i reinstalujemy systemy operacyjne oraz sterowniki,<br>rozwiązując wszelkie problemy z oprogramowaniem.<br>Odblokowujemy hasła do systemów i BIOS, zapewniając pełny dostęp do Twojego sprzętu.
-
-We install and reinstall operating systems and drivers,<br>solving all software-related issues.<br>We unlock system and BIOS passwords to give you full access to your device.
-
-Wij installeren en herinstalleren besturingssystemen en drivers,<br>en lossen alle softwareproblemen op.<br>We ontgrendelen systeem- en BIOS-wachtwoorden voor volledige toegang tot je apparaat.
-      </div>
-    </div>
-  </div>
-      <div class="slide" id="slide10">
-    <div class="slide-content">
-      <img src="slide10.jpg" alt="Slajd 10">
-      <div class="slide-description">
-
-Usuwamy blokady w urządzeniach mobilnych –<br>przywracamy je do stanu fabrycznego, gotowe dla nowego użytkownika.<br>Czyszczenie urządzenia obejmuje reset hasła, blokady rodzicielskie, FRP i format dysku.<br>Nie łamiemy zabezpieczeń – legalnie przygotowujemy sprzęt do ponownego użycia.
-
-We remove locks on mobile devices –<br>restoring them to factory settings, ready for a new user.<br>This includes password resets, parental controls, FRP, and disk formatting.<br>We don’t hack protections – we legally prepare devices for reuse.
-
-Wij verwijderen blokkades op mobiele apparaten –<br>herstellen ze naar fabrieksinstellingen, klaar voor een nieuwe gebruiker.<br>Dit omvat wachtwoordresets, ouderlijk toezicht, FRP en schijfformattering.<br>We kraken geen beveiligingen – we bereiden apparaten legaal voor hergebruik voor.
-
-      </div>
-    </div>
-  </div>
-    <div class="slide" id="slide5">
-    <div class="slide-content">
-      <img src="slide5.jpg" alt="Slajd 5">
-      <div class="slide-description">
-
-Nie ograniczamy się tylko do wymiany części!<br>Specjalizujemy się w precyzyjnych naprawach płyt głównych – diagnostyka, lutowanie, mikronaprawy.<br>Dzięki doświadczeniu i specjalistycznemu sprzętowi<br>przywracamy do życia to, co inni spisują na straty.
-
-We don’t just replace parts!<br>We specialize in precision motherboard repairs – diagnostics, soldering, micro-repairs.<br>With expert knowledge and specialized tools,<br>we bring back to life what others give up on.
-
-Wij beperken ons niet tot het vervangen van onderdelen!<br>Wij zijn gespecialiseerd in nauwkeurige moederbordreparaties – diagnose, solderen, microherstel.<br>Dankzij onze ervaring en professionele apparatuur<br>herstellen wij wat anderen al hebben opgegeven.
-
-
-      </div>
-    </div>
-  </div>
-  <div class="slide" id="slide8">
-    <div class="slide-content">
-      <img src="slide8.jpg" alt="Slajd 8">
-      <div class="slide-description">
-
-Jakość lutowania to dla nas priorytet.<br>Nie wstydzimy się naszej pracy — chętnie pokazujemy efekty na naszym fanpage.<br>Zaufaj profesjonalistom, którzy dbają o każdy detal.
-
-Quality soldering is our priority.<br>We’re proud of our work and gladly share results on our fanpage.<br>Trust professionals who care about every detail.
-
-Kwaliteit van solderen is onze prioriteit.<br>We zijn trots op ons werk en delen graag resultaten op onze fanpage.<br>Vertrouw op professionals die om elk detail geven.
-
-      </div>
-    </div>
-  </div>
-  <div class="slide" id="slide9">
-    <div class="slide-content">
-      <img src="slide9.jpg" alt="Slajd 9">
-      <div class="slide-description">
-
-Naprawiamy kontrolery do wszystkich konsol.<br>Wymieniamy analogi na nowoczesne z technologią Hall lub TRM –<br>bez problemu dryfu i dłuższa żywotność.
-
-We repair controllers for all consoles.<br>We replace analog sticks with advanced Hall or TRM technology –<br>no drift issues and longer lifespan.
-
-Wij repareren controllers voor alle consoles.<br>We vervangen analoge sticks door moderne Hall- of TRM-technologie –<br>geen driftproblemen en een langere levensduur.
-
-      </div>
-    </div>
-  </div>
-    <div class="slide" id="slide11">
-    <div class="slide-content">
-      <img src="slide11.jpg" alt="Slajd 11">
-      <div class="slide-description">
-
-Skupujemy używany sprzęt — zarówno sprawny,<br>jak i uszkodzony, oferując uczciwą gotówkę od ręki.
-
- We buy used equipment — both working<br>and damaged — offering fair cash payments on the spot.
-
-Wij kopen gebruikte apparatuur — zowel werkend<br>als defect — en bieden direct een eerlijke contante betaling.
-
-
-      </div>
-    </div>
-  </div>
-
-
-
-  </div>
-
-
-  <div class="frame"></div>
+<!-- SLIDE 3 – EN -->
+<div class="slide" id="slide3">
+    <div class="warning">⚠️</div>
+    <h1 class="accent">We are moving!</h1>
+    <p><b>New address:</b></p>
+    <div class="address">Prade 26</div>
+    <p>Starting <b>May 1st</b> we will operate at our new location.</p>
+    <p>For urgent matters please call:<br><b>+31 619299943</b></p>
 </div>
 
 <script>
-  const slides = document.querySelectorAll('.slide');
-  let current = 0;
-  const descElement = document.getElementById('slide4-desc');
-  const jsonURL = 'https://raw.githubusercontent.com/Electronica-Doc/SCR/refs/heads/main/Godziny.json';
+    /* SLIDES */
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
 
-  async function fetchDescriptionFromJSON() {
-    descElement.textContent = "Ładowanie opisu...";
-    try {
-      const response = await fetch(jsonURL + '?t=' + Date.now(), {
-        cache: "no-store"
-      });
-      const data = await response.json();
-      const combined = 
-        "Otwarte:\n" + (data.pl || "Brak opisu.") + "\n\n" +
-        "Open:\n" + (data.en || "No description.") + "\n\n" +
-        "Open\n" + (data.nl || "Geen beschrijving.");
-      descElement.textContent = combined;
-    } catch (e) {
-      console.error(e);
-      descElement.textContent = "Błąd ładowania danych.";
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 6000);
+
+    /* WYKRZYKNIKI */
+    function spawnSingleBoom() {
+        const boom = document.createElement("div");
+        boom.classList.add("boom");
+        boom.textContent = "❗";
+
+        boom.style.left = Math.random() * 90 + "%";
+        boom.style.top = Math.random() * 90 + "%";
+
+        document.body.appendChild(boom);
+
+        setTimeout(() => boom.remove(), 900 + Math.random() * 600);
     }
-  }
 
-  function nextSlide() {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
+    function spawnBurst() {
+        const count = 10 + Math.floor(Math.random() * 30); 
+        for (let i = 0; i < count; i++) {
+            setTimeout(spawnSingleBoom, Math.random() * 400);
+        }
 
-    if (current === 3) {
-      fetchDescriptionFromJSON();
+        const nextDelay = 1500 + Math.random() * 3000;
+        setTimeout(spawnBurst, nextDelay);
     }
-  }
 
-  // Start
-  slides[current].classList.add('active');
-  if (current === 3) fetchDescriptionFromJSON();
-  setInterval(nextSlide, 8000);
+    spawnBurst();
+
+    /* LOSOWE GLITCHE SYGNAŁU */
+    const glitchLayers = document.querySelectorAll('.glitch-layer');
+
+    function triggerGlitch() {
+        glitchLayers.forEach(layer => {
+            layer.style.animation = 'none';
+            void layer.offsetWidth;
+        });
+
+        glitchLayers[0].style.animation = `pixelateAnim ${1 + Math.random()*2}s`;
+        glitchLayers[1].style.animation = `blocksAnim ${1 + Math.random()*2}s`;
+        glitchLayers[2].style.animation = `wavesAnim ${1 + Math.random()*2}s`;
+
+        setTimeout(triggerGlitch, 2000 + Math.random()*4000);
+    }
+
+    triggerGlitch();
 </script>
 
 </body>
