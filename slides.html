@@ -29,11 +29,13 @@
     opacity: 1;
   }
 
+  /* LOGO tylko w slajdzie godzin */
   .logo {
     height: 120px;
     margin-bottom: 20px;
   }
 
+  /* SLIDE GODZIN */
   .hours-title {
     font-size: 10vh;
     font-weight: 900;
@@ -63,21 +65,28 @@
     color: #00e6e6;
   }
 
-  .slide-photo {
-    max-width: 60vw;
-    max-height: 60vh;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.8);
+  /* SLAJDY TEKST + OBRAZ */
+  .content-slide {
+    flex-direction: row;
+    padding: 5vw;
+    box-sizing: border-box;
   }
 
-  .desc {
+  .text-box {
+    width: 66%;
     font-size: 4vh;
-    max-width: 80vw;
-    text-align: center;
-    background: rgba(0,0,0,0.4);
-    padding: 20px;
+    line-height: 1.4;
+    max-height: 80vh;
+    overflow: hidden;
+    padding-right: 3vw;
+  }
+
+  .slide-photo {
+    width: 33%;
+    max-height: 80vh;
+    object-fit: contain;
     border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.8);
   }
 </style>
 
@@ -96,7 +105,7 @@ async function loadSlides() {
 
     const slides = [];
 
-    // SLIDE GODZIN
+    /* ---------------- SLIDE GODZIN ---------------- */
     let hoursHtml = "";
     for (const key in main.hours) {
         const h = main.hours[key];
@@ -116,13 +125,12 @@ async function loadSlides() {
       </div>
     `);
 
-    // POZOSTAŁE SLAJDY
+    /* ---------------- POZOSTAŁE SLAJDY ---------------- */
     others.slides.forEach(s => {
         slides.push(`
-          <div class="slide">
-            <img class="logo" src="logo.png">
+          <div class="slide content-slide">
+            <div class="text-box">${s.text}</div>
             <img class="slide-photo" src="${s.image}">
-            <div class="desc">${s.text}</div>
           </div>
         `);
     });
