@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Slides</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .active {
+    opacity: 1;
+  }
+
+  .logo {
+    height: 120px;
+    margin-bottom: 20px;
+  }
+
+  .hours-title {
+    font-size: 10vh;
+    font-weight: 900;
+    margin-bottom: 4vh;
+    color: #00e6e6;
+    text-shadow: 0 0 25px #00cccc;
+  }
+
+  .hours-table {
+    width: 80vw;
+    font-size: 6vh;
+    line-height: 1.4;
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2vh;
+  }
+
+  .hours-day {
+    font-weight: 700;
+  }
+
+  .hours-time {
+    font-weight: 900;
+    color: #00e6e6;
+  }
+
+  .slide-photo {
+    max-width: 60vw;
+    max-height: 60vh;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.8);
+  }
+
+  .desc {
+    font-size: 4vh;
+    max-width: 80vw;
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 20px;
+  }
+</style>
+
+</head>
+<body>
+
+<div id="slides"></div>
+
+<script>
+const MAIN_JSON = "main.json";
+const OTHER_JSON = "slides.json";
+
+async function loadSlides() {
+    const main = await fetch(MAIN_JSON + "?nocache=" + Date.now()).then(r => r.json());
+    const others = await fetch(OTHER_JSON + "?nocache=" + Date.now()).then(r => r.json());
+
+    const slides = [];
+
+    // SLIDE GODZIN
+    let hoursHtml = "";
+    for (const key in main.hours) {
+        const h = main.hours[key];
+        hoursHtml += `
+          <div class="hours-row">
+            <span class="hours-day">${h.pl} / ${h.en} / ${h.nl}</span>
+            <span class="hours-time">${h.time}</span>
+          </div>
+        `;
+    }
+
+    slides.push(`
+      <div class="slide">
+        <img class="logo" src="logo.png">
+        <div class="hours-title">Godziny otwarcia</div>
+        <div class="hours-table">${hoursHtml}</div>
+      </div>
+    `);
+
+    // POZOSTAŁE SLAJDY
+    others.slides.forEach(s => {
+        slides.push(`
+          <div class="slide">
+            <img class="logo" src="logo.png">
+            <img class="slide-photo" src="${s.image}">
+            <div class="desc">${s.text}</div>
+          </div>
+        `);
+    });
+
+    document.getElementById("slides").innerHTML = slides.join("");
+    startSlideshow();
+}
+
+function startSlideshow() {
+    const slideElements = document.querySelectorAll(".slide");
+    let index = 0;
+
+    function show() {
+        slideElements.forEach(s => s.classList.remove("active"));
+        slideElements[index].classList.add("active");
+        index = (index + 1) % slideElements.length;
+    }
+
+    show();
+    setInterval(show, 8000);
+}
+
+loadSlides();
+</script>
+
+</body>
+</html>
