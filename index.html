@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Kiosk</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+  }
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<iframe id="frame"></iframe>
+
+<script>
+function reloadFrame() {
+    document.getElementById("frame").src =
+        "slides.html?nocache=" + Date.now();
+}
+
+setInterval(reloadFrame, 60000);
+reloadFrame();
+</script>
+
+</body>
+</html>
