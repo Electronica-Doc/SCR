@@ -1,9 +1,9 @@
 {
   "slides": [
-    { "image": "slide1.jpg", "text": "Naprawa elektroniki – komputery, telefony, konsole." },
+    { "image": "slide1.png", "text": "Naprawa elektroniki – komputery, telefony, konsole." },
     { "image": "slide2.jpg", "text": "Wymiana baterii, ekranów, diagnostyka płyt głównych." },
-    { "image": "slide3.jpg", "text": "Czyszczenie wnętrza + wymiana pasty termicznej." },
-    { "image": "slide4.jpg", "text": "Instalacja systemów, sterowników, usuwanie blokad." },
-    { "image": "slide5.jpg", "text": "Profesjonalne lutowanie i mikronaprawy blobla bla bla i tak dalej huj i dwa." }
+    { "image": "slide3.png", "text": "Czyszczenie wnętrza + wymiana pasty termicznej." },
+    { "image": "slide4.png", "text": "Instalacja systemów, sterowników, usuwanie blokad." },
+    { "image": "slide5.png", "text": "Profesjonalne lutowanie i mikronaprawy blobla bla bla i tak dalej huj i dwa." }
   ]
 }
