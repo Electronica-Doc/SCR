@@ -22,7 +22,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3vh 3vw;
     box-sizing: border-box;
   }
 
@@ -30,25 +29,26 @@
     opacity: 1;
   }
 
-  /* PANEL – JEDNA RAMKA, ZAOKRĄGLONE ROGI */
+  /* PANEL – odsunięty od krawędzi o 2% */
   .panel {
-    width: 100%;
-    height: 100%;
+    width: 96%;
+    height: 96%;
+    margin: 2%;
     background: #13231d;
     border-radius: 3vw;
     overflow: hidden;
-    border: 0.6vw solid #00ffbf; /* tylko jedna ramka */
+    border: 0.6vw solid #00ffbf;
     box-shadow:
       0 0 2vw rgba(0,255,180,0.4),
       inset 0 0 2vw rgba(0,0,0,0.7);
-    padding: 4vh 4vw;
+    padding: 3vh 3vw;
     box-sizing: border-box;
   }
 
   /* LOGO */
   .logo {
     width: 30%;
-    margin: 0 auto 3vh auto;
+    margin: 0 auto 2vh auto;
     display: block;
     animation: pulse 2.5s infinite ease-in-out;
   }
@@ -64,7 +64,7 @@
     font-size: 3.5vh;
     font-weight: 900;
     text-align: center;
-    margin-bottom: 3vh;
+    margin-bottom: 2vh;
     color: #7fffd4;
     text-shadow: 0 0 2vw #4fd0a0;
   }
@@ -77,8 +77,8 @@
   .hours-row {
     display: flex;
     justify-content: space-between;
-    font-size: 1.8vh;
-    margin-bottom: 1.2vh;
+    font-size: 1.6vh; /* jeszcze mniejsze */
+    margin-bottom: 0.6vh; /* mniejszy odstęp */
   }
 
   .hours-day {
@@ -94,14 +94,16 @@
   .content-slide {
     display: flex;
     flex-direction: row;
-    gap: 4vw;
+    gap: 3vw;
+    height: 100%;
+    align-items: center; /* wyśrodkowanie pionowe */
   }
 
   /* TEKST */
   .text-box {
     width: 60%;
-    font-size: 3.3vh;
-    line-height: 1.4;
+    font-size: 3.2vh;
+    line-height: 1.3;
     max-height: 80vh;
     overflow: hidden;
     white-space: pre-line;
@@ -118,14 +120,15 @@
     to { transform: translateX(0); opacity: 1; }
   }
 
-  /* ZDJĘCIE – JEDNA RAMKA, KWADRAT */
+  /* ZDJĘCIE – większy kwadrat, wyśrodkowany pionowo */
   .photo-box {
-    width: 30%;
-    height: 30vw;
+    width: 35%;          /* większy */
+    height: 35vw;        /* kwadrat */
+    max-height: 70vh;    /* żeby nie wychodził poza panel */
     background: #000;
     border-radius: 2vw;
     overflow: hidden;
-    border: 0.4vw solid #00ffbf; /* tylko jedna ramka */
+    border: 0.4vw solid #00ffbf;
     box-shadow:
       0 0 2vw rgba(0,255,180,0.4),
       inset 0 0 2vw rgba(0,0,0,0.7);
