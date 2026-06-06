@@ -51,17 +51,24 @@
     flex-direction: column;
   }
 
-  /* GODZINY – logo po lewej, godziny po prawej */
+  /* ---------- PIERWSZY SLAJD: LOGO + GODZINY ---------- */
+
   .hours-layout {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     height: 100%;
   }
 
+  /* LEWA POŁOWA — LOGO */
+  .hours-left {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .logo {
-    width: 25%; /* przesunięte bardziej do środka */
+    width: 40%; /* większe logo */
     animation: pulse 2.5s infinite ease-in-out;
   }
 
@@ -71,12 +78,17 @@
     100% { transform: scale(1); opacity: 1; }
   }
 
-  .hours-block {
-    width: 60%;
+  /* PRAWA POŁOWA — GODZINY */
+  .hours-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .hours-title {
-    font-size: 4vh;
+    font-size: 4.5vh; /* większa czcionka */
     font-weight: 900;
     text-align: center;
     margin-bottom: 2vh;
@@ -85,15 +97,15 @@
   }
 
   .hours-table {
-    width: 100%;
+    width: 80%;
   }
 
   .hours-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.5vw;      /* mniejszy odstęp */
-    font-size: 3vh;
+    gap: 0.5vw;
+    font-size: 3.5vh; /* większe godziny */
     margin-bottom: 0.4vh;
   }
 
@@ -106,7 +118,8 @@
     color: #7fffd4;
   }
 
-  /* SLAJD TEKST + OBRAZ */
+  /* ---------- SLAJD TEKST + OBRAZ ---------- */
+
   .content-slide {
     display: flex;
     flex-direction: row;
@@ -115,7 +128,6 @@
     align-items: center;
   }
 
-  /* TEKST */
   .text-box {
     width: 55%;
     font-size: 3.2vh;
@@ -136,11 +148,10 @@
     to { transform: translateX(0); opacity: 1; }
   }
 
-  /* ZDJĘCIE – większy kwadrat, równo góra/dół */
   .photo-box {
-    width: 45%;             /* większe */
-    height: 45vw;           /* większy kwadrat */
-    max-height: calc(100% - 20px); /* równo góra/dół */
+    width: 45%;
+    height: 45vw;
+    max-height: calc(100% - 20px);
     background: #000;
 
     border-radius: 20px;
@@ -206,8 +217,10 @@ async function loadSlides() {
       <div class="slide">
         <div class="panel">
           <div class="hours-layout">
-            <img class="logo" src="logo.png">
-            <div class="hours-block">
+            <div class="hours-left">
+              <img class="logo" src="logo.png">
+            </div>
+            <div class="hours-right">
               <div class="hours-title">Otwarte / Open / Geopend</div>
               <div class="hours-table">${hoursHtml}</div>
             </div>
