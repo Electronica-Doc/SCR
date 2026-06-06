@@ -7,7 +7,7 @@
 <style>
   body {
     margin: 0;
-    background: #0d1f14;
+    background: #0f1a15; /* ciemna zieleń wpadająca w szary */
     color: white;
     font-family: 'Segoe UI', sans-serif;
     overflow: hidden;
@@ -30,43 +30,54 @@
     opacity: 1;
   }
 
+  /* PANEL / RAMKA – neonowa zieleń */
   .panel {
     width: 100%;
     height: 100%;
-    background: #11291c;
-    border-radius: 40px;
-    border: 6px solid;
+    background: #13231d;
+    border-radius: 3vw;
+    border: 0.6vw solid;
     border-image: linear-gradient(45deg, #00ffbf, #00cc99, #00ffbf) 1;
     box-shadow:
-      0 0 25px rgba(0,255,180,0.4),
-      inset 0 0 20px rgba(0,0,0,0.7);
+      0 0 2vw rgba(0,255,180,0.4),
+      inset 0 0 2vw rgba(0,0,0,0.7);
     padding: 4vh 4vw;
     box-sizing: border-box;
   }
 
+  /* LOGO – duże, pulsujące */
   .logo {
-    height: 22vh;
-    margin-bottom: 3vh;
+    width: 30%;
+    margin: 0 auto 3vh auto;
+    display: block;
+    animation: pulse 2.5s infinite ease-in-out;
   }
 
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.08); opacity: 0.85; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* GODZINY */
   .hours-title {
-    font-size: 9vh;
+    font-size: 8vh;
     font-weight: 900;
     text-align: center;
     margin-bottom: 3vh;
     color: #7fffd4;
-    text-shadow: 0 0 25px #4fd0a0;
+    text-shadow: 0 0 2vw #4fd0a0;
   }
 
   .hours-table {
-    width: 55vw;
+    width: 60%;
     margin: 0 auto;
   }
 
   .hours-row {
     display: flex;
     justify-content: space-between;
-    font-size: 5vh;
+    font-size: 4.5vh;
     margin-bottom: 2vh;
   }
 
@@ -79,36 +90,52 @@
     color: #7fffd4;
   }
 
+  /* SLAJD TEKST + OBRAZ */
   .content-slide {
     display: flex;
     flex-direction: row;
     gap: 4vw;
   }
 
+  /* TEKST – wjazd z lewej */
   .text-box {
-    width: 66%;
-    font-size: 3.8vh;
+    width: 60%;
+    font-size: 3.5vh;
     line-height: 1.4;
     max-height: 80vh;
     overflow: hidden;
     white-space: pre-line;
+    animation: slideLeft 1.2s ease-out;
   }
 
+  @keyframes slideLeft {
+    from { transform: translateX(-5vw); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  /* ZDJĘCIE – kwadrat, wjazd z prawej */
   .photo-box {
-    width: 33%;
-    height: 80vh;
+    width: 30%;
+    aspect-ratio: 1 / 1; /* kwadrat */
     background: #000;
-    border-radius: 30px;
+    border-radius: 2vw;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border: 4px solid;
+    border: 0.4vw solid;
     border-image: linear-gradient(45deg, #00ffbf, #00cc99, #00ffbf) 1;
     box-shadow:
-      0 0 20px rgba(0,255,180,0.4),
-      inset 0 0 20px rgba(0,0,0,0.7);
+      0 0 2vw rgba(0,255,180,0.4),
+      inset 0 0 2vw rgba(0,0,0,0.7);
+
+    animation: slideRight 1.2s ease-out;
+  }
+
+  @keyframes slideRight {
+    from { transform: translateX(5vw); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
   }
 
   .slide-photo {
@@ -133,6 +160,7 @@ async function loadSlides() {
 
     const slides = [];
 
+    /* ---------------- SLIDE GODZIN ---------------- */
     let hoursHtml = "";
     for (const key in main.hours) {
         const h = main.hours[key];
@@ -154,6 +182,7 @@ async function loadSlides() {
       </div>
     `);
 
+    /* ---------------- POZOSTAŁE SLAJDY ---------------- */
     others.slides.forEach(s => {
         slides.push(`
           <div class="slide">
