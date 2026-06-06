@@ -1,9 +1,24 @@
 {
   "slides": [
-    { "image": "slide1.png", "text": "Naprawa elektroniki – komputery, telefony, konsole." },
-    { "image": "slide2.jpg", "text": "Wymiana baterii, ekranów, diagnostyka płyt głównych." },
-    { "image": "slide3.png", "text": "Czyszczenie wnętrza + wymiana pasty termicznej." },
-    { "image": "slide4.png", "text": "Instalacja systemów, sterowników, usuwanie blokad." },
-    { "image": "slide5.png", "text": "Profesjonalne lutowanie i mikronaprawy blobla bla bla i tak dalej huj i dwa." }
+    {
+      "text": "Czyszczenie i konserwacja\n\nProfesjonalne czyszczenie i konserwacja urządzeń elektronicznych. Usuwamy kurz, zabrudzenia i skutki przegrzewania, wymieniamy pasty oraz termopady termoprzewodzące, przywracając sprzętowi optymalną wydajność i kulturę pracy. Regularna konserwacja wydłuża żywotność urządzeń i pomaga zapobiegać kosztownym awariom.",
+      "image": "slide1.png"
+    },
+    {
+      "text": "Naprawa urządzeń mobilnych\n\nNaprawiamy telefony, tablety i inne urządzenia mobilne. Pęknięty ekran czy uszkodzone gniazdo ładowania to tylko część naszej oferty. Zajmujemy się naprawami mechanicznymi, elektronicznymi oraz programowymi, w tym zaawansowaną diagnostyką i naprawą płyt głównych. Skutecznie przywracamy urządzenia do pełnej sprawności.",
+      "image": "slide2.jpg"
+    },
+    {
+      "text": "Serwis kontrolerów do konsol\n\nSpecjalizujemy się w naprawie i modernizacji kontrolerów do konsol. Wymiana analogów, naprawa dryfu oraz regeneracja uszkodzonych elementów to dla nas codzienność. Obsługujemy zarówno klientów indywidualnych, jak i firmy oraz serwisy. Zadbaj o komfort gry i odzyskaj pełną kontrolę nad rozgrywką.",
+      "image": "slide3.png"
+    },
+    {
+      "text": "Lutowanie i programowanie\n\nZaawansowana elektronika to nasza specjalność. Posiadamy wiedzę, doświadczenie oraz profesjonalne wyposażenie do lutowania i diagnostyki elektronicznej. Wykonujemy naprawy THT, SMD i BGA, programujemy układy SPI, KBC, eMMC i wiele innych. Specjalizujemy się również w diagnostyce niskopoziomowej magistral I²C, UART, CAN oraz analizie sprzętu i oprogramowania.",
+      "image": "slide4.png"
+    },
+    {
+      "text": "Odzyskiwanie dostępu\n\nPomagamy odzyskać dostęp do urządzeń i przywrócić je do pełnej funkcjonalności. Usuwamy zapomniane hasła, przywracamy ustawienia fabryczne oraz rozwiązujemy problemy związane z blokadami systemowymi. Obsługujemy między innymi blokady BIOS, Windows, FRP, BitLocker, kontrolę rodzicielską oraz wiele innych zabezpieczeń. Działamy legalnie i wyłącznie dla uprawnionych właścicieli urządzeń.",
+      "image": "slide5.png"
+    }
   ]
 }
