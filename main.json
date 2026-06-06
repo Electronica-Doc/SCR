@@ -3,7 +3,7 @@
     "czw": { "pl": "czw", "en": "Thu", "nl": "do", "time": "12:00–20:00" },
     "pt":  { "pl": "pt",  "en": "Fri", "nl": "vr", "time": "12:00–20:00" },
     "sob": { "pl": "sob", "en": "Sat", "nl": "za", "time": "12:00–18:00" },
-    "nd":  { "pl": "nd",  "en": "Sun", "nl": "zo", "time": "-----------" },
+    "nd":  { "pl": "nd",  "en": "Sun", "nl": "zo", "time": "~~~~~~~~~~~" },
     "pon": { "pl": "pon", "en": "Mon", "nl": "ma", "time": "18:00–20:00" },
     "wt":  { "pl": "wt",  "en": "Tue", "nl": "di", "time": "18:00–20:00" },
     "śr":  { "pl": "śr",  "en": "Wed", "nl": "wo", "time": "18:00–20:00" }
