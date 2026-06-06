@@ -15,8 +15,7 @@
 
   .slide {
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
     display: flex;
@@ -47,13 +46,22 @@
 
     padding: 20px;
     box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
   }
 
-  /* LOGO */
+  /* GODZINY – logo po lewej, godziny po prawej */
+  .hours-layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
   .logo {
-    width: 30%;
-    margin: 0 auto 20px auto;
-    display: block;
+    width: 35%;
     animation: pulse 2.5s infinite ease-in-out;
   }
 
@@ -63,27 +71,29 @@
     100% { transform: scale(1); opacity: 1; }
   }
 
-  /* GODZINY */
+  .hours-block {
+    width: 55%;
+  }
+
   .hours-title {
-    font-size: 3.5vh;
+    font-size: 4vh;
     font-weight: 900;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 2vh;
     color: #7fffd4;
     text-shadow: 0 0 20px #4fd0a0;
   }
 
   .hours-table {
-    width: 70%;
-    margin: 0 auto;
+    width: 100%;
   }
 
   .hours-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1vw;          /* mniejszy odstęp */
-    font-size: 3vh;    /* normalna wielkość */
+    gap: 1vw;
+    font-size: 3vh;
     margin-bottom: 0.5vh;
   }
 
@@ -107,7 +117,7 @@
 
   /* TEKST */
   .text-box {
-    width: 60%;
+    width: 55%;
     font-size: 3.2vh;
     line-height: 1.3;
     max-height: 80vh;
@@ -126,11 +136,11 @@
     to { transform: translateX(0); opacity: 1; }
   }
 
-  /* ZDJĘCIE – większy kwadrat, równe odstępy góra/dół */
+  /* ZDJĘCIE – większy kwadrat, równo góra/dół */
   .photo-box {
     width: 40%;
-    height: 40vw;          /* większy kwadrat */
-    max-height: calc(100% - 40px); /* 10px margines + padding */
+    height: 40vw;
+    max-height: calc(100% - 40px);
     background: #000;
 
     border-radius: 20px;
@@ -180,7 +190,7 @@ async function loadSlides() {
 
     const slides = [];
 
-    // ---------- SLIDE GODZIN ----------
+    /* ---------- SLIDE GODZIN ---------- */
     let hoursHtml = "";
     for (const key in main.hours) {
         const h = main.hours[key];
@@ -195,14 +205,18 @@ async function loadSlides() {
     slides.push(`
       <div class="slide">
         <div class="panel">
-          <img class="logo" src="logo.png">
-          <div class="hours-title">Otwarte / Open / Geopend</div>
-          <div class="hours-table">${hoursHtml}</div>
+          <div class="hours-layout">
+            <img class="logo" src="logo.png">
+            <div class="hours-block">
+              <div class="hours-title">Otwarte / Open / Geopend</div>
+              <div class="hours-table">${hoursHtml}</div>
+            </div>
+          </div>
         </div>
       </div>
     `);
 
-    // ---------- POZOSTAŁE SLAJDY ----------
+    /* ---------- POZOSTAŁE SLAJDY ---------- */
     others.slides.forEach(s => {
         slides.push(`
           <div class="slide">
@@ -228,12 +242,15 @@ function startSlideshow() {
         const text = slide.querySelector('.text-box');
         const photo = slide.querySelector('.photo-box');
 
-        if (text && photo) {
+        if (text) {
             text.classList.remove('text-animate');
-            photo.classList.remove('photo-animate');
             void text.offsetWidth;
-            void photo.offsetWidth;
             text.classList.add('text-animate');
+        }
+
+        if (photo) {
+            photo.classList.remove('photo-animate');
+            void photo.offsetWidth;
             photo.classList.add('photo-animate');
         }
     }
