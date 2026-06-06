@@ -61,7 +61,7 @@
   }
 
   .logo {
-    width: 35%;
+    width: 25%; /* przesunięte bardziej do środka */
     animation: pulse 2.5s infinite ease-in-out;
   }
 
@@ -72,7 +72,7 @@
   }
 
   .hours-block {
-    width: 55%;
+    width: 60%;
   }
 
   .hours-title {
@@ -92,9 +92,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1vw;
+    gap: 0.5vw;      /* mniejszy odstęp */
     font-size: 3vh;
-    margin-bottom: 0.5vh;
+    margin-bottom: 0.4vh;
   }
 
   .hours-day {
@@ -110,7 +110,7 @@
   .content-slide {
     display: flex;
     flex-direction: row;
-    gap: 3vw;
+    gap: 2vw;
     height: 100%;
     align-items: center;
   }
@@ -138,9 +138,9 @@
 
   /* ZDJĘCIE – większy kwadrat, równo góra/dół */
   .photo-box {
-    width: 40%;
-    height: 40vw;
-    max-height: calc(100% - 40px);
+    width: 45%;             /* większe */
+    height: 45vw;           /* większy kwadrat */
+    max-height: calc(100% - 20px); /* równo góra/dół */
     background: #000;
 
     border-radius: 20px;
